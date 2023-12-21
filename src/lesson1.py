@@ -1,7 +1,3 @@
-# -----------
-# User Instructions
-# 
-# Define a function, two_pair(ranks).
 import random
 
 mydeck = [r+s for r in '23456789TJQKA' for s in 'SHDC']
@@ -139,7 +135,8 @@ def kind(n, ranks):
     """Return the first rank that this hand has exactly n of.
     Return None if there is no n-of-a-kind in the hand."""
     for r in ranks:
-        if ranks.count(r) == n: return r 
+        if ranks.count(r) == n:
+            return r 
     return None
 
 
