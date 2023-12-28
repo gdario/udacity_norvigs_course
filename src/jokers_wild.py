@@ -27,33 +27,30 @@
 import itertools
 
 
-def expand_wild_hand(hand: tuple) -> list:
-    ranks = '23456789TJQKA'
-    red_cards = [rank + suit for rank in ranks for suit in 'HD']
-    black_cards = [rank + suit for rank in ranks for suit in 'SC']
-    out = []
-    if '?B' in hand and '?R' in hand:
-        tmp = tuple(card for card in hand if card != '?B' and card != '?R')
-        out += [tmp + (red_card,) + (black_card,) for red_card in red_cards
-                for black_card in black_cards]
-    elif '?R' in hand:
-        tmp = tuple(card for card in hand if card != '?R')
-        out += [tmp + (red_card,) for red_card in red_cards]
-    elif '?B' in hand:
-        tmp = tuple(card for card in hand if card != '?B')
-        out += [tmp + (black_card,) for black_card in black_cards]
-    else:
-        out = [hand]
-    return out
+def best_hand(hand):
+    "From a 7-card hand, return the best 5 card hand."
+    hands = itertools.combinations(hand, 5)
+    return max(hands, key=hand_rank)
 
 
 def best_wild_hand(hand):
     "Try all values for jokers in all 5-card selections."
-    hands = list(itertools.combinations(hand, 5))
-    res = []
-    for h in hands:
-        res += expand_wild_hand(h)
-    return max(res, key=hand_rank)
+    hands = [best_hand(cards) for cards in itertools.product(
+             *[replace_joker(card) for card in hand])]
+    return max(hands, key=hand_rank)
+
+
+def replace_joker(card):
+    "Return a list of possible replacements of a card."
+    red_deck = [r+s for r in '23456789TJQKA' for s in 'HD']
+    black_deck = [r+s for r in '23456789TJQKA' for s in 'SC']
+
+    if card == "?R":
+        return red_deck
+    elif card == "?B":
+        return black_deck
+    else:
+        return [card]
 
 
 def test_best_wild_hand():
@@ -135,3 +132,7 @@ def two_pair(ranks):
         return (pair, lowpair)
     else:
         return None
+
+
+if __name__ == "__main__":
+    print(test_best_wild_hand())
