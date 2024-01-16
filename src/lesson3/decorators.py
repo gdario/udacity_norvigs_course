@@ -1,8 +1,6 @@
-# %%
 from functools import update_wrapper
 
 
-# %%
 def decorator(d):
     "Make function d a decorator. d wraps a function f"
     def _d(f):
@@ -10,7 +8,7 @@ def decorator(d):
     update_wrapper(_d, d)
     return _d
 
-# %%
+
 @decorator
 def n_ary(f):
     """Given binary function f(x, y), return an n_ary function such that
@@ -20,7 +18,6 @@ def n_ary(f):
     return n_ary_f
 
 
-# %%
 @decorator
 def memo(f):
     """Decorator that caches the return value for each call to f(args).
@@ -38,7 +35,6 @@ def memo(f):
     return _f
 
 
-# %%
 @decorator
 def countcalls(f):
     """Decorator that counts the number of calls to itself and stores them in
@@ -49,16 +45,30 @@ def countcalls(f):
     callcounts[_f] = 0
     return _f
 
+
 callcounts = {}
 
 
-# %%
+print('\n ----- Without memoization -----')
 @countcalls
 def fib(n):
     return 1 if n <= 1 else fib(n - 1) + fib(n - 2)
 
 
-# %%
+fib(20)
+
+
+print('\n ----- Without memoization -----')
+@countcalls
+@memo
+def fib(n):
+    return 1 if n <= 1 else fib(n - 1) + fib(n - 2)
+
+
+fib(20)
+print(f'Num. of fn calls (w/o and with memoization: {callcounts.values()}')
+
+
 @decorator
 def trace(f):
     indent = '   '
@@ -77,10 +87,8 @@ def trace(f):
     trace.level = 0
     return _f
 
-# %%
 @trace
 def fib(n):
     return 1 if n <= 1 else fib(n - 1) + fib(n - 2)
 
 fib(5)
-# %%
