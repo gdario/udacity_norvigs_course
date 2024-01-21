@@ -3,3 +3,4 @@ src/*.swp
 nbs/.ipynb_checkpoints/
 videos/
 .env/
+src/lesson4/__pycache__/
