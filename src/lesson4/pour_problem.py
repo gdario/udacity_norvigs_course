@@ -29,7 +29,7 @@ def successors(x, y, X, Y):
     from the (x, y) state and how."""
     assert x <= X and y <= Y  # (x, y) is glass levels; X and Y are glass sizes
     return {
-        ((0, y + x) if y + x <= Y else (x - (Y - y), y + (Y - y))): "X ->Y ",
+        ((0, y + x) if y + x <= Y else (x - (Y - y), y + (Y - y))): "X -> Y",
         ((x + y, 0) if x + y <= X else (x + (X - x), y - (X - x))): "X <- Y",
         (X, y): "fill X",
         (x, Y): "fill Y",
