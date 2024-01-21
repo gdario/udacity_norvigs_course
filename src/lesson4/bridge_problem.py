@@ -1,6 +1,3 @@
-from collections import deque
-
-
 def bsuccessors(state):
     """Return a dict of {state: action} pairs. A state is a (here, there, t)
     tuple, where here and there are frozensets of people (indicated by their
