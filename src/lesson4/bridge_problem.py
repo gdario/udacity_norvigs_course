@@ -50,7 +50,6 @@ def bridge_problem(here):
             return path
         for (state, action) in bsuccessors(state1).items():
             if state not in explored:
-                here, there, t = state
                 explored.add(state)
                 path2 = path + [action, state]
                 frontier.append(path2)
