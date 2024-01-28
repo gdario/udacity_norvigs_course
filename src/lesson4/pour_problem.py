@@ -25,7 +25,7 @@ def pour_problem(X, Y, goal, start=(0, 0)):
 
 
 def successors(x, y, X, Y):
-    """Return a dict of {state: action} paris describing what can be reached
+    """Return a dict of {state: action} pairs describing what can be reached
     from the (x, y) state and how."""
     assert x <= X and y <= Y  # (x, y) is glass levels; X and Y are glass sizes
     return {
