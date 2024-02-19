@@ -1,6 +1,8 @@
+.env/
+.vscode/
 src/__pycache__/
 src/*.swp
-nbs/.ipynb_checkpoints/
 videos/
-.env/
 src/lesson4/__pycache__/
+nbs/.virtual_documents/
+nbs/.ipynb_checkpoints/
